@@ -9,6 +9,8 @@ const About = () => {
        <div className={styleAbout.centerText}>
         <p className={styleAbout.feature}>Unlock the Power of Online Content Management</p>
         <p className={styleAbout.description}>Welcome to our innovative web application, designed to revolutionize how businesses manage their online presence. Our intuitive system empowers users to publish and distribute content with ease, ensuring maximum impact and visibility.</p>
+        <p className={styleAbout.description}>Welcome to our innovative web application, designed to revolutionize how businesses manage their online presence. Our intuitive system empowers users to publish and distribute content with ease, ensuring maximum impact and visibility.</p>
+        <p className={styleAbout.description}>Welcome to our innovative web application, designed to revolutionize how businesses manage their online presence. Our intuitive system empowers users to publish and distribute content with ease, ensuring maximum impact and visibility.</p>
 
         </div>
         <br />
