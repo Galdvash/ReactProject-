@@ -1,0 +1,82 @@
+:root {
+  /* Light Mode */
+  
+  --BgColor_LightMode: #eee;
+  --NavbarColor_LightMode: #008997;
+  --PColor_LightMode: #517376;
+  --TitleColor_LightMode: #037784;
+  --BtnColor_LightMode: #74512D;
+  --HoverColor_LightMode: #AF8F6F;
+  --LinkColor_LightMode: #F8F4E1;
+  /* Dark Mode */
+  --BgColor_DarkMode: #0C0C0C;
+  --NavbarColor_DarkMode: #481E14;
+  --PColor_DarkMode: #F2613F;
+  --TitleColor_DarkMode: #9B3922;
+  --BtnColor_DarkMode: #481E14;
+  --HoverColor_DarkMode: #9B3922;
+  --LinkColor_DarkMode: #FFBE98;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  overflow-y: auto;
+}
+/* About  */ /* Cards and FindTheOne */
+.bodyAbout{
+  overflow-y: scroll;
+  height: 100vh;
+  background-color: var(--BgColor_LightMode);
+  transition: background-color 0.8s, color 0.3s ease-in-out;
+}
+
+.dark-mode .bodyAbout,.dark-mode .bodyFindTheOne,.dark-mode .bodyCards{
+  background-color:var(--BgColor_DarkMode) ;
+  transition: background-color 0.8s, color 0.3s ease-in;
+  }
+
+
+h1,
+h2 {
+  color: var(--TitleColor_LightMode);
+}
+
+p {
+  color: var(--PColor_LightMode);
+}
+
+nav.container_nav {
+  background-color: var(--NavbarColor_LightMode);
+}
+
+.link {
+  color: var(--LinkColor_LightMode);
+}
+
+.link:hover {
+  color: var(--HoverColor_LightMode);
+}
+/* DarkMode */
+.dark-mode h1 {
+  color: var(--TitleColor_DarkMode);
+}
+.dark-mode h2{
+  color: var(--TitleColor_DarkMode);
+}
+.dark-mode p{
+  color: var(--TitleColor_DarkMode);
+}
+.dark-mode nav.container_nav {
+  background-color:var(--NavbarColor_DarkMode); 
+}
+.dark-mode .link{
+  color:var(--LinkColor_DarkMode)
+}
+.dark-mode .link:hover{
+  color:var(--HoverColor_DarkMode)
+}
+
