@@ -7,6 +7,8 @@ import FavoritCards from "./component/FavoritCards/FavoritCards";
 import Register from "./component/Register/Register";
 import Cards from "./component/Cards/Cards";
 import SandBox from "./component/SandBox/SandBox";
+import Footer from "./component/Footer/Footer";
+import Bla from "./component/Bla";
 import { ThemeProvider } from "./hooks/DarkMode/DarkModeContext";
 import { UserProvider } from "./hooks/UserHooks/userContextApp";
 import "./hooks/DarkMode/DarkMode.css"
@@ -24,7 +26,10 @@ function App() {
             <Route path="/myCards" element={<Cards />} />
             <Route path="/register" element={<Register />} />
             <Route path="/sandBox" element={<SandBox />} />
+            <Route path="/Bla" element={<Bla />} />
+            
           </Routes>
+          <Footer/>
         </BrowserRouter>
       </UserProvider>
     </ThemeProvider>

@@ -8,12 +8,12 @@ const useGetUser = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      if (!token || !userInformation) return;
+      if (!token || userInformation) return;
 
       const config = {
         method: "get",
         maxBodyLength: Infinity,
-        url: `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/${userInformation._id}`,
+        url: `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/me`,
         headers: {
           "x-auth-token": token,
         },
@@ -22,15 +22,16 @@ const useGetUser = () => {
       try {
         const response = await axios(config);
         setUserInformation(response.data);
+        localStorage.setItem("user_id", response.data._id); // Save user ID to local storage
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
     fetchUser();
-  }, [userInformation, token, setUserInformation]);
+  }, [token, setUserInformation, userInformation]); // Added userInformation to the dependency array
 
-  return; // אין צורך להחזיר ערך מתוך ה-hook
+  return { userInformation };
 };
 
 export default useGetUser;

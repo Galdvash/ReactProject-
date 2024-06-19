@@ -8,7 +8,10 @@ import SearchIcon from "../Navbar/ImagesNavBar/SearchIcon.png";
 import Jobs from "../Navbar//ImagesNavBar/Jobs.png";
 import "../Navbar/Navbar.css";
 
+
+
 function NavBar() {
+
   const { isSun, handleIconClick } = useContext(ThemeContext);
   const [isExpanded, setIsExpanded] = useState(false);
   const { userInformation } = useContext(UserContext);
@@ -51,6 +54,11 @@ function NavBar() {
           {userInformation?.isBusiness && (
             <>
               <li>
+                <Link className="link" to={"/Bla"}>
+                  bla
+                </Link>
+              </li>
+              <li>
                 <Link className="link" to={"/"}>
                   About
                 </Link>
@@ -65,26 +73,33 @@ function NavBar() {
                   My Cards
                 </Link>
               </li>
-              <li>
-                <Link className="link" to={"/favCards"}>
-                  Favorit Cards
-                </Link>
-              </li>
+             
              
             </>
           )}
-          {!userInformation?.isAdmin && !userInformation?.isBusiness && (
+          {!userInformation?.isAdmin && !userInformation?.isBusiness && userInformation  && (
+            <>
+                <li>
+                <Link className="link" to={"/"}>
+                  About 
+                </Link>
+                </li>
+                <li>
+                  <Link className="link" to={"/FindTheOne"}>
+                  FindTheOne
+                  </Link>
+                </li>
+              
+            </>  
+          )}
+          {!userInformation && !userInformation?.isAdmin && !userInformation?.isBusiness && (
             <>
             <li>
               <Link className="link" to={"/"}>
                 About 
               </Link>
             </li>
-            <li>
-            <Link className="link" to={"/FindTheOne"}>
-                Find The One
-              </Link>
-            </li>
+         
             </>
             
           )}

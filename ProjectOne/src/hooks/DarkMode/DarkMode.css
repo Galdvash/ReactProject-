@@ -43,14 +43,26 @@ body{
 h1,
 h2 {
   color: var(--TitleColor_LightMode);
+  
 }
 
 p {
   color: var(--PColor_LightMode);
 }
 
-nav.container_nav {
+
+nav.container_nav,footer.bodyFooter {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  box-shadow: 0px 0px 10px #F7DED0;
+  transition: background-color 0.8s, color 0.3s ease-out;
+  z-index: 100;
   background-color: var(--NavbarColor_LightMode);
+}
+footer.bodyFooter{
+  position: fixed;
+  bottom: 0;
 }
 
 .link {
@@ -70,7 +82,7 @@ nav.container_nav {
 .dark-mode p{
   color: var(--TitleColor_DarkMode);
 }
-.dark-mode nav.container_nav {
+.dark-mode nav.container_nav,.dark-mode footer.bodyFooter {
   background-color:var(--NavbarColor_DarkMode); 
 }
 .dark-mode .link{

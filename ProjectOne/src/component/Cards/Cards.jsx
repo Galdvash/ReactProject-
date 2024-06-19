@@ -1,30 +1,40 @@
-import React,{useContext} from "react";
-import useCardsApi from "../../hooks/useCardsHooks/useCardsApi";
-import useAddCards from "./AddCard/useAddCards";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import useGetUser from "../../hooks/UserHooks/useGetUser"; // Corrected the path
 import Loading from "../Loading/Loading";
 import FormComponent from "./AddCard/FormComponent";
 import styleCards from "./Cards.module.css";
+import useAddCards from "./AddCard/useAddCards";
 
-
-const Cards = () => {
-
-  const [cards,setCards,loading, error] = useCardsApi();
+const MyCards = () => {
+  const [cards, setCards] = useState([]);
+  const { userInformation } = useGetUser(); // Destructure userInformation
   const { isClick, handleChange, handleSubmit, formValid, formData, closeForm, OpenAndCloseCard } = useAddCards();
-console.log(cards);
+
+  useEffect(() => {
+    const fetchCards = async () => {
+      if (userInformation) {
+        try {
+          const response = await axios.get('https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards');
+          const userCards = response.data.filter(card => card.user_id === userInformation._id);
+          setCards(userCards);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+    fetchCards();
+  }, [userInformation]);
+
   const addCardToList = (newCard) => {
     setCards((prevCards) => [newCard, ...prevCards]);
   };
-  
 
-  if (loading) {
+  if (!userInformation || !cards) {
     return <Loading />;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  if (!cards || cards.length === 0) {
+  if (cards.length === 0) {
     return <div>No cards found</div>;
   }
 
@@ -33,18 +43,20 @@ console.log(cards);
       <div className="bodyCards">
         <div className={styleCards.container_cards}>
           <div className={styleCards.frontCard}>
-            <h1>Cards</h1>
+            <h1>My Cards</h1>
+            <br></br>
             <ul className={styleCards.listOfCards}>
-              {cards.slice(0, 3).map((card) => (
+              {cards.map((card) => (
                 <li className={styleCards.item} key={card._id}>
                   <img
                     className={styleCards.imgCards}
                     src={card.image.url}
                     alt={card.image.alt}
                   />
-                  <h2>{card.title}</h2>
-                  <p className={styleCards.p}>{card.subtitle}</p>
-                  <p className={styleCards.p}>{card.address.country}</p>
+                  <h2 className={styleCards.title}>{card.title}</h2>
+                  <p className={styleCards.cardSubtitle}>{card.subtitle}</p>
+                  <p className={styleCards.countryName}>{card.address.country}</p>
+                  <p className={styleCards.cardDescription}>{card.description}</p>
                 </li>
               ))}
             </ul>
@@ -66,4 +78,4 @@ console.log(cards);
   );
 };
 
-export default Cards;
+export default MyCards;

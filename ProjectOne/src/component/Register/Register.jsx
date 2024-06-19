@@ -174,16 +174,10 @@ const SignInRegister = () => {
               placeholder="Email"
               className="input"
               name="email"
-              value={isLoginData.email}
-              onChange={handleChange}
+              value={isLoginData.email} onChange={handleChange}
             />
             <input
-              type="password"
-              placeholder="Password"
-              className="input"
-              name="password"
-              value={isLoginData.password}
-              onChange={handleChange}
+              type="password" placeholder="Password" className="input"  name="password"  value={isLoginData.password} onChange={handleChange}
             />
             <button className="btn">Sign In</button>
           </form>
