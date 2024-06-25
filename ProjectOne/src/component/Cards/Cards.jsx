@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import useGetUser from "../../hooks/UserHooks/useGetUser"; // Corrected the path
+import useGetUser from "../../hooks/UserHooks/useGetUser";
 import Loading from "../Loading/Loading";
 import FormComponent from "./AddCard/FormComponent";
 import styleCards from "./Cards.module.css";
@@ -8,16 +8,20 @@ import useAddCards from "./AddCard/useAddCards";
 
 const MyCards = () => {
   const [cards, setCards] = useState([]);
-  const { userInformation } = useGetUser(); // Destructure userInformation
+  const { userInformation } = useGetUser(); 
   const { isClick, handleChange, handleSubmit, formValid, formData, closeForm, OpenAndCloseCard } = useAddCards();
 
   useEffect(() => {
     const fetchCards = async () => {
       if (userInformation) {
+        const token = localStorage.getItem('token');
         try {
-          const response = await axios.get('https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards');
-          const userCards = response.data.filter(card => card.user_id === userInformation._id);
-          setCards(userCards);
+          const response = await axios.get('https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards/my-cards', {
+            headers: {
+              'x-auth-token': token
+            },
+          });
+          setCards(response.data);
         } catch (error) {
           console.error(error);
         }
@@ -34,17 +38,13 @@ const MyCards = () => {
     return <Loading />;
   }
 
-  if (cards.length === 0) {
-    return <div>No cards found</div>;
-  }
-
   return (
     <div>
       <div className="bodyCards">
         <div className={styleCards.container_cards}>
           <div className={styleCards.frontCard}>
-            <h1>My Cards</h1>
-            <br></br>
+            <h1 className={styleCards.stickTitle}>My Cards</h1>
+            {cards.length === 0 && <div>No cards found</div>}
             <ul className={styleCards.listOfCards}>
               {cards.map((card) => (
                 <li className={styleCards.item} key={card._id}>
@@ -53,23 +53,26 @@ const MyCards = () => {
                     src={card.image.url}
                     alt={card.image.alt}
                   />
-                  <h2 className={styleCards.title}>{card.title}</h2>
-                  <p className={styleCards.cardSubtitle}>{card.subtitle}</p>
-                  <p className={styleCards.countryName}>{card.address.country}</p>
-                  <p className={styleCards.cardDescription}>{card.description}</p>
+                  <h2>{card.title}</h2>
+                  <p className={styleCards.p}>{card.subtitle}</p>
+                  <p className={styleCards.p}>{card.address.country}</p>
                 </li>
               ))}
             </ul>
-            <button onClick={OpenAndCloseCard}>+</button>
-            {isClick && (
-              <FormComponent
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                formValid={formValid}
-                formData={formData}
-                closeForm={closeForm}
-                addCardToList={addCardToList}
-              />
+            {(userInformation.isAdmin || userInformation.isBusiness) && (
+              <>
+                <button onClick={OpenAndCloseCard}>+</button>
+                {isClick && (
+                  <FormComponent
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                    formValid={formValid}
+                    formData={formData}
+                    closeForm={closeForm}
+                    addCardToList={addCardToList}
+                  />
+                )}
+              </>
             )}
           </div>
         </div>

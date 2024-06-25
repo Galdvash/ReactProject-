@@ -6,9 +6,15 @@ const FormComponent = ({ handleChange, handleSubmit, formValid, formData, closeF
   const token = localStorage.getItem('token');
 
   const addCard = async () => {
+    if (!token) {
+      console.error('No token found in localStorage');
+      return;
+    }
+
     try {
       const config = {
         method: 'post',
+        maxBodyLength: Infinity,
         url: 'https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards',
         headers: {
           'x-auth-token': token,
@@ -38,10 +44,10 @@ const FormComponent = ({ handleChange, handleSubmit, formValid, formData, closeF
       const response = await axios(config);
       console.log('Card added successfully:', response.data);
 
-      // עדכון רשימת הכרטיסים באופן אוטומטי
+      // Update card list automatically
       addCardToList(response.data);
 
-      closeForm(); // סגירת הטופס אחרי שהכרטיס נוסף בהצלחה
+      closeForm(); // Close the form after the card is added successfully
     } catch (error) {
       console.error('Error adding card:', error);
     }
@@ -114,7 +120,7 @@ const FormComponent = ({ handleChange, handleSubmit, formValid, formData, closeF
               type="url"
               name="image.url"
               onChange={handleChange}
-              required
+         
             />
             <label className={styleForm.label}>Image Alt:</label>
             <input
@@ -122,7 +128,7 @@ const FormComponent = ({ handleChange, handleSubmit, formValid, formData, closeF
               type="text"
               name="image.alt"
               onChange={handleChange}
-              required
+         
             />
           </div>
           <hr />
@@ -175,9 +181,9 @@ const FormComponent = ({ handleChange, handleSubmit, formValid, formData, closeF
           <input
             className={styleForm.input}
             type="text"
-            name="zip"
-            required
-            onChange={handleChange}
+              name="zip"
+  
+              onChange={handleChange}
           />
           <hr />
           <button onClick={addCard} type="button" disabled={!formValid} style={{ cursor: formValid ? 'pointer' : 'not-allowed' }}>Send</button>

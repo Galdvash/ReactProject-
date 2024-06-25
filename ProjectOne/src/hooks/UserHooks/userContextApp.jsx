@@ -1,4 +1,3 @@
-// userContextApp.js
 import React, { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext();
@@ -9,9 +8,14 @@ export const UserProvider = ({ children }) => {
   );
 
   useEffect(() => {
-    if (userInformation) {
-      localStorage.setItem("userInformation", JSON.stringify(userInformation));
+    const storedUserInformation = localStorage.getItem('userInformation');
+    if (storedUserInformation) {
+      setUserInformation(JSON.parse(storedUserInformation));
     }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("userInformation", JSON.stringify(userInformation));
   }, [userInformation]);
 
   return (

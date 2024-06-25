@@ -1,23 +1,38 @@
 import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import styleAbout from "./About.module.css";
 
+// Fix for default marker icon issue with Leaflet and Webpack
+let DefaultIcon = L.icon({
+    iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+    iconSize: [25, 41], // size of the icon
+    iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+    popupAnchor: [1, -34], // point from which the popup should open relative to the iconAnchor
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
+
 const About = () => {
+  const position = [51.505, -0.09]; // Replace with your desired coordinates
+
   return (
-    <div className="bodyAbout">
+    <div className="bodyAbout" style={{paddingBottom:"200px"}}>
       <div className={styleAbout.container}>
         <h1 className={styleAbout.title}>Welcome to Our Platform</h1>
-       <div className={styleAbout.centerText}>
-        <p className={styleAbout.feature}>Unlock the Power of Online Content Management</p>
-        <p className={styleAbout.description}>Welcome to our innovative web application, designed to revolutionize how businesses manage their online presence. Our intuitive system empowers users to publish and distribute content with ease, ensuring maximum impact and visibility.</p>
-        <p className={styleAbout.description}>Welcome to our innovative web application, designed to revolutionize how businesses manage their online presence. Our intuitive system empowers users to publish and distribute content with ease, ensuring maximum impact and visibility.</p>
-        <p className={styleAbout.description}>Welcome to our innovative web application, designed to revolutionize how businesses manage their online presence. Our intuitive system empowers users to publish and distribute content with ease, ensuring maximum impact and visibility.</p>
-
+        <div className={styleAbout.centerText}>
+          <p className={styleAbout.feature}>Unlock the Power of Online Content Management</p>
+          <p className={styleAbout.description}>Welcome to our innovative web application, designed to revolutionize how businesses manage their online presence. Our intuitive system empowers users to publish and distribute content with ease, ensuring maximum impact and visibility.</p>
+          <p className={styleAbout.description}>Welcome to our innovative web application, designed to revolutionize how businesses manage their online presence. Our intuitive system empowers users to publish and distribute content with ease, ensuring maximum impact and visibility.</p>
+          <p className={styleAbout.description}>Welcome to our innovative web application, designed to revolutionize how businesses manage their online presence. Our intuitive system empowers users to publish and distribute content with ease, ensuring maximum impact and visibility.</p>
         </div>
         <br />
-          <h2 className={styleAbout.sectionTitle}>Our Mission:</h2>
-        <div className={styleAbout.centerText}> 
+        <h2 className={styleAbout.sectionTitle}>Our Mission:</h2>
+        <div className={styleAbout.centerText}>
           <p className={styleAbout.feature}>Our mission is to provide a cutting-edge content management platform that empowers businesses and individuals to effectively manage and enhance their online presence. We strive to offer tools that simplify content distribution, ensure security, and promote professional networking, enabling our users to achieve their digital goals effortlessly.</p>
-        </div> 
+        </div>
         <br />
         <h2 className={styleAbout.sectionTitle}>Key Features:</h2>
         <ul className={styleAbout.list}>
@@ -45,7 +60,17 @@ const About = () => {
         <p className={styleAbout.description}>Join us and experience the difference in content management. Start maximizing your online potential today with our platform.</p>
         <br />
         <h2 className={styleAbout.sectionTitle}>Our Location:</h2>
-        {/* Add your location information here */}
+        <MapContainer center={position} zoom={13} style={{ height: "500px", width: "60%" }}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <Marker position={position}>
+            <Popup>
+              Our location
+            </Popup>
+          </Marker>
+        </MapContainer>
       </div>
     </div>
   );

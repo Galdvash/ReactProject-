@@ -9,13 +9,13 @@
   --HoverColor_LightMode: #AF8F6F;
   --LinkColor_LightMode: #F8F4E1;
   /* Dark Mode */
-  --BgColor_DarkMode: #0C0C0C;
-  --NavbarColor_DarkMode: #481E14;
-  --PColor_DarkMode: #F2613F;
-  --TitleColor_DarkMode: #9B3922;
-  --BtnColor_DarkMode: #481E14;
-  --HoverColor_DarkMode: #9B3922;
-  --LinkColor_DarkMode: #FFBE98;
+  --BgColor_DarkMode: #242d3d; 
+  --NavbarColor_DarkMode: #1A202C;        
+  --PColor_DarkMode: #ECC94B;         
+  --TitleColor_DarkMode: #63B3ED;      
+  --BtnColor_DarkMode: #F6AD55;        
+  --HoverColor_DarkMode: #A0AEC0;      
+  --LinkColor_DarkMode: #9F7AEA;
 }
 
 * {
@@ -33,10 +33,20 @@ body{
   background-color: var(--BgColor_LightMode);
   transition: background-color 0.8s, color 0.3s ease-in-out;
 }
-
-.dark-mode .bodyAbout,.dark-mode .bodyFindTheOne,.dark-mode .bodyCards{
+.sandBoxContainer{
+  background-color: #eee;
+}
+.dark-mode .bodyAbout,.dark-mode .bodyFindTheOne,.dark-mode .bodyCards ,.dark-mode .bodyLoading,.dark-mode .sandBoxContainer{
   background-color:var(--BgColor_DarkMode) ;
   transition: background-color 0.8s, color 0.3s ease-in;
+  }
+  .dot-spinner__dot::before{
+    background-color: #183153;
+    transition: background-color 0.8s, color 0.3s ease-in-out;
+  }
+  .dark-mode .dot-spinner__dot::before{
+    background-color: wheat;;
+    transition: background-color 0.8s, color 0.3s ease-in-out;
   }
 
 
@@ -51,13 +61,7 @@ p {
 }
 
 
-nav.container_nav,footer.bodyFooter {
-  width: 100%;
-  height: 80px;
-  position: fixed;
-  box-shadow: 0px 0px 10px #F7DED0;
-  transition: background-color 0.8s, color 0.3s ease-out;
-  z-index: 100;
+nav.container_nav,footer.bodyFooter,.link_list.open {
   background-color: var(--NavbarColor_LightMode);
 }
 footer.bodyFooter{
@@ -82,7 +86,7 @@ footer.bodyFooter{
 .dark-mode p{
   color: var(--TitleColor_DarkMode);
 }
-.dark-mode nav.container_nav,.dark-mode footer.bodyFooter {
+.dark-mode nav.container_nav,.dark-mode footer.bodyFooter,.dark-mode .link_list.open {
   background-color:var(--NavbarColor_DarkMode); 
 }
 .dark-mode .link{

@@ -10,7 +10,7 @@ const useAddCards = () => {
     phone: "",
     email: "",
     web: "",
-    image: { // כאן משתנה המבנה של image 
+    image: { 
       url: "",
       alt: ""
     },
@@ -69,7 +69,7 @@ const useAddCards = () => {
     e.preventDefault();
     if (formValid) {
       console.log("Form submitted:", formData);
-      // ניהול הלוגיקה להגשת הטופס כאן
+      // Handle form submission logic here
     }
   };
 

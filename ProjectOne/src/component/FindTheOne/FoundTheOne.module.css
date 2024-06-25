@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
   overflow-y: scroll;
-  padding-top: 140px;
+  padding-top: 100px;
 }
 
 .stickTitle {
@@ -26,8 +26,8 @@
 .title {
   text-align: center;
   font-weight: bold;
-  font-size: 24px;
-  padding-top: 10px;
+  font-size: 23px;
+  
 }
 
 .cardSubtitle {
@@ -40,7 +40,7 @@
 
 .cardDescription {
   text-align: center;
-  padding: 35px 40px 0px 40px;
+  padding: 10px 40px 0px 40px;
   font-size: 13px
   ;
 }
@@ -49,27 +49,32 @@
   text-align: center;
   font-weight: bold;
   font-size: 14px;
-  padding-top: 38px;
+  padding-top: 18px;
   ;
 }
 
 .listOfCards {  
   width: 100%;
+  max-width: 1627px;
   display: flex;
   justify-content: center;
   align-items: baseline;
   flex-wrap: wrap;
   flex-direction: row;
-  gap: 5em;
+  padding-bottom: 200px;
+  gap: 3em;
 }
 
 .item {
+  display: flex;
+  flex-direction: column;
   width: 300px;
-  height: 40vh;
+  height: 400px; 
   list-style-type: none;
   border: 1px solid black;
   font-size: 10px;
   border-radius: 25px;
+  padding: 5px; 
 }
 
 .imgCards {
@@ -77,4 +82,10 @@
   height: 20vh;
   border-radius: 25px 25px 0 0;
 
+}
+.heartIcon{
+  position: relative;
+  left: 130px;
+  top: 10px;
+  
 }
