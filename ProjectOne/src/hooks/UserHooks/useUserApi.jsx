@@ -171,34 +171,34 @@ return Object.keys(newErrors).length === 0;
 };
 
 const handleSubmit = async (e) => {
-e.preventDefault();
-if (validate()) {
-const configRegister = {
-method: "post",
-maxBodyLength: Infinity,
-url: "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users",
-headers: {},
-data: data,
-};
-try {
-const response = await axios(configRegister);
-toast.success("Registration successful!");
-setIsData({
-name: { first: "", middle: "", last: "" },
-phone: "",email: "",password: "",
-image: { url: "", alt: "" },
-address: {state: "",country: "", city: "",street: "",houseNumber: "",zip: "",}
-,isBusiness: false,isAdmin: false,
-})
-return response;
-} catch (error) {
-console.error(error);
-toast.error("Registration failed!");
-}
-} else {
-console.log("Validation failed");
-}
-};
+  e.preventDefault();
+  if (validate()) {
+  const configRegister = {
+  method: "post",
+  maxBodyLength: Infinity,
+  url: "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users",
+  headers: {},
+  data: data,
+  };
+  try {
+    const response = await axios(configRegister);
+    toast.success("Registration successful!");
+    setIsData({
+    name: { first: "", middle: "", last: "" },
+    phone: "",email: "",password: "",
+    image: { url: "", alt: "" },
+    address: {state: "",country: "", city: "",street: "",houseNumber: "",zip: "",}
+    ,isBusiness: false,isAdmin: false,
+    })
+  return response;
+  } catch (error) {
+  console.error(error);
+  toast.error("Registration failed!");
+  }
+  } else {
+  console.log("Validation failed");
+  }
+  };
 //lOGIN
 const handleSubmit2 = async (e) => {
 e.preventDefault();
